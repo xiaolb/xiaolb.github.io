@@ -65,10 +65,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-实现一个类似音乐播放器的滑动效果" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-从详情返回主页停留在进入的位置" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/实现一个类似音乐播放器的滑动效果/" class="article-date">
-  <time datetime="2018-09-19T02:57:18.000Z" itemprop="datePublished">2018-09-19</time>
+    <a href="/从详情返回主页停留在进入的位置/" class="article-date">
+  <time datetime="2018-10-23T05:57:35.000Z" itemprop="datePublished">2018-10-23</time>
 </a>
     
   </div>
@@ -79,7 +79,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/实现一个类似音乐播放器的滑动效果/">实现一个类似音乐播放器的滑动效果</a>
+      <a class="article-title" href="/从详情返回主页停留在进入的位置/">从详情返回主页停留在进入的位置</a>
     </h1>
   
 
@@ -87,12 +87,22 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>使用css和js的鼠标事件实现一个滑动的效果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">  &lt;title&gt;能拖拽的进度条&lt;/title&gt;</span><br><span class="line">  &lt;style type=&quot;text/css&quot;&gt;</span><br><span class="line">    *&#123;</span><br><span class="line">      margin: 0;</span><br><span class="line">      padding: 0;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    .scroll &#123;</span><br><span class="line">      margin: 100px;</span><br><span class="line">      width: 500px;</span><br><span class="line">      height: 5px;</span><br><span class="line">      background: #ccc;</span><br><span class="line">      position: relative;</span><br><span class="line">    &#125;</span><br><span class="line">    .bar &#123;</span><br><span class="line">      width: 10px;</span><br><span class="line">      height: 20px;</span><br><span class="line">      background: pink;</span><br><span class="line">      position: absolute;</span><br><span class="line">      top: -7px;</span><br><span class="line">      left: 0;</span><br><span class="line">      cursor: pointer;</span><br><span class="line">    &#125;</span><br><span class="line">    .mask &#123;</span><br><span class="line">      position: absolute;</span><br><span class="line">      left: 0;</span><br><span class="line">      top: 0;</span><br><span class="line">      background: blue;</span><br><span class="line">      width: 0;</span><br><span class="line">      height: 5px;</span><br><span class="line">    &#125;</span><br><span class="line">  &lt;/style&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">  &lt;div class=&quot;scroll&quot; id=&quot;scroll&quot;&gt;</span><br><span class="line">    &lt;div class=&quot;bar&quot; id=&quot;bar&quot;&gt;&lt;/div&gt;</span><br><span class="line">    &lt;div class=&quot;mask&quot; id=&quot;mask&quot;&gt;&lt;/div&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line"></span><br><span class="line">  &lt;!-- input的方式实现 --&gt;</span><br><span class="line">  &lt;input type=&quot;range&quot; name=&quot;points&quot; min=&quot;1&quot; max=&quot;10&quot;&gt;</span><br><span class="line"></span><br><span class="line">  &lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">    var scroll = document.getElementById(&apos;scroll&apos;)</span><br><span class="line">    var bar = document.getElementById(&apos;bar&apos;)</span><br><span class="line">    var mask = document.getElementById(&apos;mask&apos;)</span><br><span class="line"></span><br><span class="line">    // 计算滑动距离相对父元素的距离</span><br><span class="line">    var barleft = 0;</span><br><span class="line"></span><br><span class="line">    bar.onmousedown = function(event) &#123;</span><br><span class="line">      var event = event || window.event;</span><br><span class="line">      var leftVal = event.clientX - this.offsetLeft; // 获取点击的位置到滑块左边的距离，</span><br><span class="line">      var that = this;</span><br><span class="line"></span><br><span class="line">      document.onmousemove = function(event) &#123;</span><br><span class="line">        var event = event || window.event;</span><br><span class="line">        // clientX获取当前鼠标的位置</span><br><span class="line">        barleft = event.clientX - leftVal;</span><br><span class="line"></span><br><span class="line">        // 设置临界值</span><br><span class="line">        if(barleft &lt; 0) &#123;</span><br><span class="line">          barleft = 0;</span><br><span class="line">        &#125; else if (barleft &gt; scroll.offsetWidth - bar.offsetWidth) &#123;</span><br><span class="line">          barleft = scroll.offsetWidth - bar.offsetWidth</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        // 设置bar的宽度</span><br><span class="line">        mask.style.width = barleft + &apos;px&apos;;</span><br><span class="line"></span><br><span class="line">        // 通过left实现滑块移动的一个效果</span><br><span class="line">        that.style.left = barleft + &apos;px&apos;;</span><br><span class="line"></span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      // 做出一个兼容，防止在松开的时候，滑块会跟着移动</span><br><span class="line">      document.getSelection ? window.getSelection().removeAllRanges() : document.selection.empty();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 在鼠标抬起的时候去掉onmousemove事件</span><br><span class="line">    document.onmouseup =function() &#123;</span><br><span class="line">      document.onmousemove = null;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">  &lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure></p>
+        <p>最近在工作中碰到了这样的一个需求，从主页进入某个详情的时候再次返回的时候需要停留在进入的当前位置，要解决这个问题需要注意几个问题：<br>1、怎么保存主页的一个数据;<br>2、返回的时候不需要再次进行接口请求；<br>3、返回的时候获取到进入时的一个滚动的高度。</p>
+<h2 id="1、数据保存"><a href="#1、数据保存" class="headerlink" title="1、数据保存"></a>1、数据保存</h2><p>第一个问题的话，比较好解决，现在我们在项目中开发的时候经常会用到状态管理器（redux,vuex），所以在主页的时候只要是使用的状态管理的都比较好解决，至于不是用的就得用缓存来进行处理了（这边不做详细的描述了）。</p>
+<h2 id="2、接口请求的禁止"><a href="#2、接口请求的禁止" class="headerlink" title="2、接口请求的禁止"></a>2、接口请求的禁止</h2><p>在没有这个功能的时候，每次进入页面䀶直接再次请求接口数据，每次都进行一个刷新，那怎么去禁止掉这个功能呢？其实很简单，加一个值的判断就好了，如果某个值存在，就去请求，否则就不请求。</p>
+<p>有这个思路了，就开始实现吧，因为我们是在整个项目当中，那么我们的这个值的判断就必须是全局的，至少是我在其他页面返回的时候需要能拿到这个值，否则的话它的意义就不大了，这边因为用的是状态管理，，所以这个值的处理和数据是一样的，放在状态管理里边。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">componentDidMount() &#123;</span><br><span class="line">    const &#123;  globalFalg &#125; = this.props;</span><br><span class="line">    // globalFalg放在状态管理里边，service是接口请求数据</span><br><span class="line">    globalFalg &amp;&amp; service() </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">componentWillUnmount() &#123;</span><br><span class="line">    // 在离开页面的时候通过redux将他的值变为false,这样在返回来的时候就不会再次去刷新数据了。</span><br><span class="line">    this.props.getGlobalFalg(false)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这样，我们就能解决第二个问题了。</p>
+<h2 id="3、恢复到滚动的一个高度"><a href="#3、恢复到滚动的一个高度" class="headerlink" title="3、恢复到滚动的一个高度"></a>3、恢复到滚动的一个高度</h2><p>在做这个事情的之前我们得获取一个滚动条的一个高度，才能在回来的时候去改变这个值。</p>
+<p>先上代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">componentDidMount() &#123;</span><br><span class="line">   // 在window.scrollY不为0的时候注册滚动事件，离开页面的时候才能删除</span><br><span class="line">   this.regScroll(this.handleThrottle.bind(this));</span><br><span class="line"></span><br><span class="line">   // 回来的时候调用函数，恢复到进入的位置</span><br><span class="line">   this.refToTop()</span><br><span class="line">&#125;</span><br><span class="line">componentWillUnmount() &#123;</span><br><span class="line">    // 离开的时候将注册的事件注销</span><br><span class="line">    window.onscroll = null</span><br><span class="line">&#125;</span><br><span class="line">// 注册滚动事件监听</span><br><span class="line">regScroll(fun) &#123;</span><br><span class="line">    if(window.onscroll === null) &#123;</span><br><span class="line">        window.onscroll = fun;</span><br><span class="line">    &#125;</span><br><span class="line">    if(typeof(window.onscroll) === &apos;function&apos;) &#123;</span><br><span class="line">        const oldScroll = window.onscroll;</span><br><span class="line">        window.onscroll = function() &#123;</span><br><span class="line">            fun();</span><br><span class="line">            oldScroll();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">// 中间跳转</span><br><span class="line">handleThrottle() &#123;</span><br><span class="line">    window.scrollY &amp;&amp; this.props.saveScrollTop(window.scrollY);</span><br><span class="line">&#125;</span><br><span class="line">// 恢复的实际操作</span><br><span class="line">refToTop() &#123;</span><br><span class="line">    // globalFalg 接口是否刷新，getScrollTopData保存的滚动的高度</span><br><span class="line">    let &#123; getScrollTopData, globalFalg &#125; = this.props;</span><br><span class="line">    // 当接口刷新的时候其实就不需要滚动了，有些分页的数据将获取不到。</span><br><span class="line">    getScrollTopData = globalFalg ? 0 : getScrollTopData;</span><br><span class="line">    // 使用window.scrollTo去到我们需要的位置</span><br><span class="line">    window.scrollTo(0, getScrollTopData);</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure></p>
+<p>这里为什么要自定义一个滚动事件啊，因为js原生的事件有个问题，如果我们不销毁这个事件，那么我们在其他页面进行页面滚动的时候也会触发这个事件，就会造成保存的scrollTop不是我们需要的，如果我们呢销毁了，在其他页面就会报错，说找不到这个滚动事件。所以啊，这边就重新定义了一个事件。</p>
+<p>滚动的高度保存了，数据有了，就剩最后一步了，将页面滚动到我们需要的位置，可以使用window.scrollTo(x, y)，x为水平位置，y为垂直位置。</p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>从详情返回主页并停留在进入的位置已经大体完成，细节还需要自己去注意~~~~。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://leafMaple.cn/实现一个类似音乐播放器的滑动效果/" data-id="cjo82gd8z0003agqo8ouk9n5n" class="article-share-link">Share</a>
+      <a data-url="http://leafMaple.cn/从详情返回主页停留在进入的位置/" data-id="cjo9gd1b6000528qoqethshuy" class="article-share-link">Share</a>
       
       
     </footer>
@@ -106,7 +116,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
+    <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
   </nav>
 
 </section>
@@ -125,7 +135,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li></ul>
     </div>
   </div>
 
@@ -136,6 +146,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/回文数子串/">(no title)</a>
+          </li>
         
           <li>
             <a href="/从详情返回主页停留在进入的位置/">从详情返回主页停留在进入的位置</a>
@@ -151,10 +165,6 @@
         
           <li>
             <a href="/react通信/">react通信</a>
-          </li>
-        
-          <li>
-            <a href="/git命令/">git命令</a>
           </li>
         
       </ul>

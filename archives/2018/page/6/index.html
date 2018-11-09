@@ -5,12 +5,12 @@
   
 
   
-  <title>枫叶</title>
+  <title>Archives: 2018 | 枫叶</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="枫叶的博客">
 <meta property="og:type" content="website">
 <meta property="og:title" content="枫叶">
-<meta property="og:url" content="http://leafMaple.cn/page/4/index.html">
+<meta property="og:url" content="http://leafMaple.cn/archives/2018/page/6/index.html">
 <meta property="og:site_name" content="枫叶">
 <meta property="og:description" content="枫叶的博客">
 <meta property="og:locale" content="cn">
@@ -65,50 +65,42 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-vue的数据双向绑定原理" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/vue的数据双向绑定原理/" class="article-date">
-  <time datetime="2018-09-19T02:56:19.000Z" itemprop="datePublished">2018-09-19</time>
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2018" class="archive-year">2018</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/git命令/" class="archive-article-date">
+  <time datetime="2018-09-12T08:40:41.000Z" itemprop="datePublished">Sep 12</time>
 </a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
+      
   
     <h1 itemprop="name">
-      <a class="article-title" href="/vue的数据双向绑定原理/">vue的数据双向绑定原理</a>
+      <a class="archive-article-title" href="/git命令/">git命令</a>
     </h1>
   
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>细话不多说，直接上代码撸：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">	&lt;title&gt;Vue数据双向绑定原理实现&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">	&lt;input id=&quot;entryData&quot; type=&quot;text&quot;&gt;&lt;/input&gt;</span><br><span class="line">	&lt;div id=&quot;showData&quot;&gt;&lt;/div&gt;</span><br><span class="line">	&lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">		const obj = &#123;</span><br><span class="line">			pwd: &apos;dhaskj&apos;</span><br><span class="line">		&#125;;</span><br><span class="line"></span><br><span class="line">		Object.defineProperty(obj, &apos;name&apos;, &#123;</span><br><span class="line">			get() &#123;</span><br><span class="line">				console.log(&apos;get data&apos;);</span><br><span class="line">			&#125;,</span><br><span class="line">			set(val) &#123;</span><br><span class="line">				console.log(&apos;set data&apos;);</span><br><span class="line">				document.getElementById(&apos;entryData&apos;).value = val;</span><br><span class="line">				document.getElementById(&apos;showData&apos;).innerText = val;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;);</span><br><span class="line"></span><br><span class="line">		document.getElementById(&apos;entryData&apos;).addEventListener(&apos;keyup&apos;, function(ev) &#123;</span><br><span class="line">			obj.name = ev.target.value;</span><br><span class="line">		&#125;);</span><br><span class="line">	&lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
-<p>通过Object.defineProperty中的get和set方法实现数据的获取以及更改。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://leafMaple.cn/vue的数据双向绑定原理/" data-id="cjo9gd1b2000228qof4yf6t19" class="article-share-link">Share</a>
-      
-      
-    </footer>
+    </header>
   </div>
-  
 </article>
-
-
+  
+  
+    </div></section>
   
 
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/3/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/5/">Next &raquo;</a>
+    <a class="extend prev" rel="prev" href="/archives/2018/page/5/">&laquo; Prev</a><a class="page-number" href="/archives/2018/">1</a><span class="space">&hellip;</span><a class="page-number" href="/archives/2018/page/4/">4</a><a class="page-number" href="/archives/2018/page/5/">5</a><span class="page-number current">6</span>
   </nav>
 
 </section>
