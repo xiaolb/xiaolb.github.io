@@ -40,6 +40,10 @@
         <a href="/" id="logo">枫叶</a>
       </h1>
       
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">blogs</a>
+        </h2>
+      
     </div>
     <div id="header-inner" class="inner">
       <nav id="main-nav">
@@ -64,6 +68,76 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-二叉树的深度遍历和反转" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/二叉树的深度遍历和反转/" class="article-date">
+  <time datetime="2018-11-15T06:48:03.000Z" itemprop="datePublished">2018-11-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/二叉树的深度遍历和反转/">二叉树的深度遍历和反转</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!--
+author: 阿彬-肖利彬
+date: 2017-02-26
+title: 二叉树的遍历
+tags: 算法
+category: 前端
+status: publish 
+summary: 本文二叉树的一些知识点。
+-->
+<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p>二叉树的每个节点最多只有两颗字树，左子树和右子树，次序不能颠倒。<br>==== 性质 ====<br>    非空的二叉树的第n层最多有2^(n-1)个元素；<br>    深度为h的二叉树最多有2^h-1个节点。</p>
+<p>==== 满二叉树 ====<br>满二叉树除了最后一层的节点，其他节点都有两个子节点。<br>若满二叉树的深度为h，那么这棵树的节点数必然是2^h-1.</p>
+<h2 id="二叉树的遍历"><a href="#二叉树的遍历" class="headerlink" title="二叉树的遍历"></a>二叉树的遍历</h2><p>遍历即将树的所有结点访问且仅访问一次。按照根节点位置的不同分为前序遍历，中序遍历，后序遍历。</p>
+<pre><code>前序遍历：根节点-&gt;左子树-&gt;右子树
+
+中序遍历：左子树-&gt;根节点-&gt;右子树
+
+后序遍历：左子树-&gt;右子树-&gt;根节点
+</code></pre><p>例如：求下面树的三种遍历</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/10567362-b87d3274b8919d64.gif?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="二叉树图gif.gif"></p>
+<pre><code>前序遍历：abdefgc
+
+中序遍历：debgfac
+
+后序遍历：edgfbca
+</code></pre><h2 id="算法求解二叉树的深度"><a href="#算法求解二叉树的深度" class="headerlink" title="算法求解二叉树的深度"></a>算法求解二叉树的深度</h2><p>给定一个二叉树，求二叉树的深度。<br>首先进行分析，要求出二叉树的深度，那么我们必须要对二叉树进行遍历，对每个节点都需要去走一遍。<br>要求对树进行遍历，那么我们肯定会选择一种遍历的方法，由于是从根节点开始的，于是我选取的是前序遍历。<br>根据上边二叉树的前序遍历来进行深度的求解，当树节点没有了子树节点后返回0，每回到上一层次就+1，到达根节点的时候就判断左右子树所返回的值取大的那个，就是我们所求的最大深度。  </p>
+<p><img src="https://upload-images.jianshu.io/upload_images/10567362-c5de844a50240a3b.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="二叉树正向.PNG"></p>
+<p>如 上图的深度为5.</p>
+<p>下面就是js代码的实现方式。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Definition for a binary tree node.</span><br><span class="line"> * function TreeNode(val) &#123;</span><br><span class="line"> *     this.val = val;</span><br><span class="line"> *     this.left = this.right = null;</span><br><span class="line"> * &#125;</span><br><span class="line"> */</span><br><span class="line">/**</span><br><span class="line"> * @param &#123;TreeNode&#125; root</span><br><span class="line"> * @return &#123;number&#125;</span><br><span class="line"> */</span><br><span class="line">var maxDepth = function(root) &#123;</span><br><span class="line"></span><br><span class="line">    // 第一种方法，因为将root树当成值传入到了TreeNode里边，所以在后边出现了list.val.letf的地方。</span><br><span class="line">    let list = new TreeNode(root);</span><br><span class="line">    let height,left,right;</span><br><span class="line">    </span><br><span class="line">    if(list.val === null)&#123;</span><br><span class="line">        return 0;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    left = maxDepth(list.val.left);</span><br><span class="line">    right = maxDepth(list.val.right);</span><br><span class="line">    height = (left&gt;right?left:right)+1;</span><br><span class="line">    </span><br><span class="line">    return height;</span><br><span class="line"></span><br><span class="line">    // 第二种方法，直接上手</span><br><span class="line">    return root === null ? 0 : Math.max(maxDepth(root.left), maxDepth(root.right)) + 1;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<h2 id="算法求解二叉树的反转"><a href="#算法求解二叉树的反转" class="headerlink" title="算法求解二叉树的反转"></a>算法求解二叉树的反转</h2><p>得到题目，首先要判断一下，所给的树是不是空的，如果为空，那么就不需要去计算了。<br>其次，从根节点开始遍历，知道找到最下层的树节点，然后将左右节点的值进行交换，一步一步向上层走，知道根节点的左右子树交换完。<br>其实，这个题和上边求解二叉树的深度的题是相差不大的，只是将深度的计算变成了两个值的交换。</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/10567362-59f348b1ce9792ea.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="二叉树反转.PNG"></p>
+<p>二叉树的反转如上图。</p>
+<p>下边是二叉树反转的代码。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Definition for a binary tree node.</span><br><span class="line"> * function TreeNode(val) &#123;</span><br><span class="line"> *     this.val = val;</span><br><span class="line"> *     this.left = this.right = null;</span><br><span class="line"> * &#125;</span><br><span class="line"> */</span><br><span class="line">/**</span><br><span class="line"> * @param &#123;TreeNode&#125; root</span><br><span class="line"> * @return &#123;TreeNode&#125;</span><br><span class="line"> */</span><br><span class="line">var invertTree = function(root) &#123;</span><br><span class="line">    if (!root)</span><br><span class="line">        return null;</span><br><span class="line">        </span><br><span class="line">    // recursive</span><br><span class="line">    invertTree(root.left);</span><br><span class="line">    invertTree(root.right);</span><br><span class="line">    temp = root.left;</span><br><span class="line">    root.left = root.right;</span><br><span class="line">    root.right = temp;</span><br><span class="line">    </span><br><span class="line">    return root;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>二叉树的遍历很简单，但是出的题会非常的多，比如，求取节点的个数，比较两颗树是否相等等等。学无止境，不断前进。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://leafMaple.cn/二叉树的深度遍历和反转/" data-id="cjoi8hq8i0001b8tkz4om47m2" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-回文数子串" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -94,7 +168,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://leafMaple.cn/回文数子串/" data-id="cjo9gg6a70004m0qotex5oax3" class="article-share-link">Share</a>
+      <a data-url="http://leafMaple.cn/回文数子串/" data-id="cjoi8hq8r0005b8tk98ciakui" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法/">算法</a></li></ul>
@@ -106,12 +180,239 @@
 
 
   
-
-
-  <nav id="page-nav">
+    <article id="post-从详情返回主页停留在进入的位置" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/从详情返回主页停留在进入的位置/" class="article-date">
+  <time datetime="2018-10-23T05:57:35.000Z" itemprop="datePublished">2018-10-23</time>
+</a>
     
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
-  </nav>
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/从详情返回主页停留在进入的位置/">从详情返回主页停留在进入的位置</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最近在工作中碰到了这样的一个需求，从主页进入某个详情的时候再次返回的时候需要停留在进入的当前位置，要解决这个问题需要注意几个问题：<br>1、怎么保存主页的一个数据;<br>2、返回的时候不需要再次进行接口请求；<br>3、返回的时候获取到进入时的一个滚动的高度。</p>
+<h2 id="1、数据保存"><a href="#1、数据保存" class="headerlink" title="1、数据保存"></a>1、数据保存</h2><p>第一个问题的话，比较好解决，现在我们在项目中开发的时候经常会用到状态管理器（redux,vuex），所以在主页的时候只要是使用的状态管理的都比较好解决，至于不是用的就得用缓存来进行处理了（这边不做详细的描述了）。</p>
+<h2 id="2、接口请求的禁止"><a href="#2、接口请求的禁止" class="headerlink" title="2、接口请求的禁止"></a>2、接口请求的禁止</h2><p>在没有这个功能的时候，每次进入页面䀶直接再次请求接口数据，每次都进行一个刷新，那怎么去禁止掉这个功能呢？其实很简单，加一个值的判断就好了，如果某个值存在，就去请求，否则就不请求。</p>
+<p>有这个思路了，就开始实现吧，因为我们是在整个项目当中，那么我们的这个值的判断就必须是全局的，至少是我在其他页面返回的时候需要能拿到这个值，否则的话它的意义就不大了，这边因为用的是状态管理，，所以这个值的处理和数据是一样的，放在状态管理里边。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">componentDidMount() &#123;</span><br><span class="line">    const &#123;  globalFalg &#125; = this.props;</span><br><span class="line">    // globalFalg放在状态管理里边，service是接口请求数据</span><br><span class="line">    globalFalg &amp;&amp; service() </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">componentWillUnmount() &#123;</span><br><span class="line">    // 在离开页面的时候通过redux将他的值变为false,这样在返回来的时候就不会再次去刷新数据了。</span><br><span class="line">    this.props.getGlobalFalg(false)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这样，我们就能解决第二个问题了。</p>
+<h2 id="3、恢复到滚动的一个高度"><a href="#3、恢复到滚动的一个高度" class="headerlink" title="3、恢复到滚动的一个高度"></a>3、恢复到滚动的一个高度</h2><p>在做这个事情的之前我们得获取一个滚动条的一个高度，才能在回来的时候去改变这个值。</p>
+<p>先上代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">componentDidMount() &#123;</span><br><span class="line">   // 在window.scrollY不为0的时候注册滚动事件，离开页面的时候才能删除</span><br><span class="line">   this.regScroll(this.handleThrottle.bind(this));</span><br><span class="line"></span><br><span class="line">   // 回来的时候调用函数，恢复到进入的位置</span><br><span class="line">   this.refToTop()</span><br><span class="line">&#125;</span><br><span class="line">componentWillUnmount() &#123;</span><br><span class="line">    // 离开的时候将注册的事件注销</span><br><span class="line">    window.onscroll = null</span><br><span class="line">&#125;</span><br><span class="line">// 注册滚动事件监听</span><br><span class="line">regScroll(fun) &#123;</span><br><span class="line">    if(window.onscroll === null) &#123;</span><br><span class="line">        window.onscroll = fun;</span><br><span class="line">    &#125;</span><br><span class="line">    if(typeof(window.onscroll) === &apos;function&apos;) &#123;</span><br><span class="line">        const oldScroll = window.onscroll;</span><br><span class="line">        window.onscroll = function() &#123;</span><br><span class="line">            fun();</span><br><span class="line">            oldScroll();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">// 中间跳转</span><br><span class="line">handleThrottle() &#123;</span><br><span class="line">    window.scrollY &amp;&amp; this.props.saveScrollTop(window.scrollY);</span><br><span class="line">&#125;</span><br><span class="line">// 恢复的实际操作</span><br><span class="line">refToTop() &#123;</span><br><span class="line">    // globalFalg 接口是否刷新，getScrollTopData保存的滚动的高度</span><br><span class="line">    let &#123; getScrollTopData, globalFalg &#125; = this.props;</span><br><span class="line">    // 当接口刷新的时候其实就不需要滚动了，有些分页的数据将获取不到。</span><br><span class="line">    getScrollTopData = globalFalg ? 0 : getScrollTopData;</span><br><span class="line">    // 使用window.scrollTo去到我们需要的位置</span><br><span class="line">    window.scrollTo(0, getScrollTopData);</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure></p>
+<p>这里为什么要自定义一个滚动事件啊，因为js原生的事件有个问题，如果我们不销毁这个事件，那么我们在其他页面进行页面滚动的时候也会触发这个事件，就会造成保存的scrollTop不是我们需要的，如果我们呢销毁了，在其他页面就会报错，说找不到这个滚动事件。所以啊，这边就重新定义了一个事件。</p>
+<p>滚动的高度保存了，数据有了，就剩最后一步了，将页面滚动到我们需要的位置，可以使用window.scrollTo(x, y)，x为水平位置，y为垂直位置。</p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>从详情返回主页并停留在进入的位置已经大体完成，细节还需要自己去注意~~~~。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://leafMaple.cn/从详情返回主页停留在进入的位置/" data-id="cjoi8hq8u0007b8tkud2xx6j3" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-实现一个类似音乐播放器的滑动效果" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/实现一个类似音乐播放器的滑动效果/" class="article-date">
+  <time datetime="2018-09-19T02:57:18.000Z" itemprop="datePublished">2018-09-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/实现一个类似音乐播放器的滑动效果/">实现一个类似音乐播放器的滑动效果</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>使用css和js的鼠标事件实现一个滑动的效果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">  &lt;title&gt;能拖拽的进度条&lt;/title&gt;</span><br><span class="line">  &lt;style type=&quot;text/css&quot;&gt;</span><br><span class="line">    *&#123;</span><br><span class="line">      margin: 0;</span><br><span class="line">      padding: 0;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    .scroll &#123;</span><br><span class="line">      margin: 100px;</span><br><span class="line">      width: 500px;</span><br><span class="line">      height: 5px;</span><br><span class="line">      background: #ccc;</span><br><span class="line">      position: relative;</span><br><span class="line">    &#125;</span><br><span class="line">    .bar &#123;</span><br><span class="line">      width: 10px;</span><br><span class="line">      height: 20px;</span><br><span class="line">      background: pink;</span><br><span class="line">      position: absolute;</span><br><span class="line">      top: -7px;</span><br><span class="line">      left: 0;</span><br><span class="line">      cursor: pointer;</span><br><span class="line">    &#125;</span><br><span class="line">    .mask &#123;</span><br><span class="line">      position: absolute;</span><br><span class="line">      left: 0;</span><br><span class="line">      top: 0;</span><br><span class="line">      background: blue;</span><br><span class="line">      width: 0;</span><br><span class="line">      height: 5px;</span><br><span class="line">    &#125;</span><br><span class="line">  &lt;/style&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">  &lt;div class=&quot;scroll&quot; id=&quot;scroll&quot;&gt;</span><br><span class="line">    &lt;div class=&quot;bar&quot; id=&quot;bar&quot;&gt;&lt;/div&gt;</span><br><span class="line">    &lt;div class=&quot;mask&quot; id=&quot;mask&quot;&gt;&lt;/div&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line"></span><br><span class="line">  &lt;!-- input的方式实现 --&gt;</span><br><span class="line">  &lt;input type=&quot;range&quot; name=&quot;points&quot; min=&quot;1&quot; max=&quot;10&quot;&gt;</span><br><span class="line"></span><br><span class="line">  &lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">    var scroll = document.getElementById(&apos;scroll&apos;)</span><br><span class="line">    var bar = document.getElementById(&apos;bar&apos;)</span><br><span class="line">    var mask = document.getElementById(&apos;mask&apos;)</span><br><span class="line"></span><br><span class="line">    // 计算滑动距离相对父元素的距离</span><br><span class="line">    var barleft = 0;</span><br><span class="line"></span><br><span class="line">    bar.onmousedown = function(event) &#123;</span><br><span class="line">      var event = event || window.event;</span><br><span class="line">      var leftVal = event.clientX - this.offsetLeft; // 获取点击的位置到滑块左边的距离，</span><br><span class="line">      var that = this;</span><br><span class="line"></span><br><span class="line">      document.onmousemove = function(event) &#123;</span><br><span class="line">        var event = event || window.event;</span><br><span class="line">        // clientX获取当前鼠标的位置</span><br><span class="line">        barleft = event.clientX - leftVal;</span><br><span class="line"></span><br><span class="line">        // 设置临界值</span><br><span class="line">        if(barleft &lt; 0) &#123;</span><br><span class="line">          barleft = 0;</span><br><span class="line">        &#125; else if (barleft &gt; scroll.offsetWidth - bar.offsetWidth) &#123;</span><br><span class="line">          barleft = scroll.offsetWidth - bar.offsetWidth</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        // 设置bar的宽度</span><br><span class="line">        mask.style.width = barleft + &apos;px&apos;;</span><br><span class="line"></span><br><span class="line">        // 通过left实现滑块移动的一个效果</span><br><span class="line">        that.style.left = barleft + &apos;px&apos;;</span><br><span class="line"></span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      // 做出一个兼容，防止在松开的时候，滑块会跟着移动</span><br><span class="line">      document.getSelection ? window.getSelection().removeAllRanges() : document.selection.empty();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 在鼠标抬起的时候去掉onmousemove事件</span><br><span class="line">    document.onmouseup =function() &#123;</span><br><span class="line">      document.onmousemove = null;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">  &lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://leafMaple.cn/实现一个类似音乐播放器的滑动效果/" data-id="cjoi8hq8s0006b8tk8j3g680n" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-vue的数据双向绑定原理" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/vue的数据双向绑定原理/" class="article-date">
+  <time datetime="2018-09-19T02:56:19.000Z" itemprop="datePublished">2018-09-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/vue的数据双向绑定原理/">vue的数据双向绑定原理</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>细话不多说，直接上代码撸：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">	&lt;title&gt;Vue数据双向绑定原理实现&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">	&lt;input id=&quot;entryData&quot; type=&quot;text&quot;&gt;&lt;/input&gt;</span><br><span class="line">	&lt;div id=&quot;showData&quot;&gt;&lt;/div&gt;</span><br><span class="line">	&lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">		const obj = &#123;</span><br><span class="line">			pwd: &apos;dhaskj&apos;</span><br><span class="line">		&#125;;</span><br><span class="line"></span><br><span class="line">		Object.defineProperty(obj, &apos;name&apos;, &#123;</span><br><span class="line">			get() &#123;</span><br><span class="line">				console.log(&apos;get data&apos;);</span><br><span class="line">			&#125;,</span><br><span class="line">			set(val) &#123;</span><br><span class="line">				console.log(&apos;set data&apos;);</span><br><span class="line">				document.getElementById(&apos;entryData&apos;).value = val;</span><br><span class="line">				document.getElementById(&apos;showData&apos;).innerText = val;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;);</span><br><span class="line"></span><br><span class="line">		document.getElementById(&apos;entryData&apos;).addEventListener(&apos;keyup&apos;, function(ev) &#123;</span><br><span class="line">			obj.name = ev.target.value;</span><br><span class="line">		&#125;);</span><br><span class="line">	&lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<p>通过Object.defineProperty中的get和set方法实现数据的获取以及更改。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://leafMaple.cn/vue的数据双向绑定原理/" data-id="cjoi8hq8n0003b8tkg5woedax" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-react通信" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/react通信/" class="article-date">
+  <time datetime="2018-09-12T09:58:44.000Z" itemprop="datePublished">2018-09-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/react通信/">react通信</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="通信的几种方式"><a href="#通信的几种方式" class="headerlink" title="通信的几种方式"></a>通信的几种方式</h2><p>一般来说，react里边有几种常用的方式：父到子，子到父，兄弟组件之间的通信。</p>
+<p>===== 父向子通信 =====</p>
+<ul>
+<li>直接标签中插入参数即可</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">let _number = this.state.number</span><br><span class="line">&lt;Child number=&#123;_number&#125; /&gt;</span><br><span class="line"></span><br><span class="line">// 在子组件中就能直接通过this.props.number来调用父组件传的值</span><br></pre></td></tr></table></figure>
+<p>需要注意，_number 可以是普通参数、this.state.xxx 参数、也可以是this.props.xxx参数，其中this.state.xxx参数若发生改变，会导致 Child 重新渲染</p>
+<p>===== 子向父通信 =====</p>
+<ul>
+<li>需要从 Parent 处接一个绑定了父组件的函数，然后在 Child 内部调用修改父的相关参数，达到效果</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">// 父组件在调用子组件的时候传递一个函数</span><br><span class="line">turn(option) &#123;</span><br><span class="line">	this.setState(&#123;option:option&#125;)</span><br><span class="line">&#125;</span><br><span class="line">let dotsNode1 = &lt;SliderDots turn=&#123;this.turn.bind(this)&#125;/&gt;</span><br><span class="line"></span><br><span class="line">// 子组件中调用this.props.turn(option)若父组件中存在turn则会将option传递给父组件，从而会调用父组件中的turn函数。</span><br><span class="line">handleDotClick(count) &#123;</span><br><span class="line">	let option = count-this.props.nowPage;</span><br><span class="line">	this.props.turn(option);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">render() &#123;</span><br><span class="line">	return (</span><br><span class="line">	    &lt;span </span><br><span class="line">	    	key=&#123;&apos;dot&apos;+index&#125;</span><br><span class="line">	    	onClick=&#123;this.handleDotClick.bind(this,index)&#125;&gt;</span><br><span class="line">	    &lt;/span&gt;</span><br><span class="line">	)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>同样，可以修改父组件的 this.state.xxx（ this.setState() 触发渲染），也可以修改this.xxx等值</p>
+<p>===== 兄弟组件之间通信 =====</p>
+<ul>
+<li>需要从 Parent 处接一个绑定了父组件的函数，然后在 ChildOne 内部调用修改父的相关参数，再将参数传递给childTwo，达到效果。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 在上述子传父的基础上，有一个dotNode2，在dotsNode2中绑定option，就能用了。</span><br><span class="line">let dotsNode2 = &lt;SliderDots option = &#123;this.state.option&#125;/&gt;</span><br></pre></td></tr></table></figure>
+<p>同样，可以修改父组件的 this.state.xxx（ this.setState() 触发渲染），也可以修改this.xxx等值.  </p>
+<p>实质上，改变其中一个兄弟组件的值，传递给父元素，再setState一下，组件就会重新渲染，在另外一个兄弟组件中的值就会发生变化，达到了兄弟组件之间值传递的效果。</p>
+<p>具体的可以看看 <a href="https://github.com/xiaolb/react-swiper" title="react实现轮播" target="_blank" rel="noopener">轮播图</a> 和 <a href="https://github.com/xiaolb/comment" target="_blank" rel="noopener">评论</a> 这两个小栗子。</p>
+<p>===== 结论 =====</p>
+<p>组件之间的通信说着比较容易，但是在实际上用的时候还是有点压力的，多用。</p>
+<p>本文只初步的说明了组件之间的通信。针对于不复杂的程序还是够了，但是对于比较复杂的，通信需要用到redux。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://leafMaple.cn/react通信/" data-id="cjoi8hq8d0000b8tkekaxp53l" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-git命令" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/git命令/" class="article-date">
+  <time datetime="2018-09-12T08:40:41.000Z" itemprop="datePublished">2018-09-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/git命令/">git命令</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="git命令"><a href="#git命令" class="headerlink" title="git命令"></a>git命令</h3><p><img src="http://upload-images.jianshu.io/upload_images/10567362-b5e99d3f6b107d02.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="git.png"></p>
+<h3 id="新建git仓库"><a href="#新建git仓库" class="headerlink" title="新建git仓库"></a>新建git仓库</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 在当前目录新建一个Git代码库</span><br><span class="line">$ git init</span><br><span class="line"></span><br><span class="line"># 新建一个目录，并将其初始化为Git代码库</span><br><span class="line">$ git init [file_name]</span><br><span class="line"></span><br><span class="line"># 下载一个项目，和它的整个代码历史</span><br><span class="line">$ git clone [url]</span><br></pre></td></tr></table></figure>
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><p>git的配置文件为.gitconfig，它可以在用户主目录下（全局配置），也可以在项目目录下（项目配置）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># 显示当前的git配置</span><br><span class="line">$ git config --list</span><br><span class="line"></span><br><span class="line"># 编辑git配置文件</span><br><span class="line">$ git config -e [--global]</span><br><span class="line"></span><br><span class="line"># 设置提交代码时的用户信息</span><br><span class="line">$ git config [--global] user.name &quot;[name]&quot;</span><br><span class="line">$ git config [--global] user.email &quot;[email address]&quot;</span><br></pre></td></tr></table></figure></p>
+<h3 id="增加-删除文件"><a href="#增加-删除文件" class="headerlink" title="增加/删除文件"></a>增加/删除文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"># 添加指定文件到暂存区</span><br><span class="line">$ git add [file1] [file2]</span><br><span class="line"></span><br><span class="line"># 添加指定目录到暂存区，包括子目录</span><br><span class="line">$ git add [dir]</span><br><span class="line"></span><br><span class="line"># 添加当前目录的所有文件到暂存区</span><br><span class="line">$ git add .</span><br><span class="line"></span><br><span class="line"># 添加每个变化前，都会要求确认</span><br><span class="line"># 对于同一个文件的多出变化，可以实现分次提交</span><br><span class="line">$ git add -p</span><br><span class="line"></span><br><span class="line"># 删除工作区文件，并且将这次删除放入暂存区</span><br><span class="line">$ git rm [file1] [file2]</span><br><span class="line"></span><br><span class="line"># 停止追踪指定文件，该文件会保留在工作区</span><br><span class="line">$ git rm --cached [file]</span><br><span class="line"></span><br><span class="line"># 改名文件，并且将这个改名存入暂存区</span><br><span class="line">$ git mv [file-original] [file-renamed]</span><br></pre></td></tr></table></figure>
+<h3 id="分支"><a href="#分支" class="headerlink" title="分支"></a>分支</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"># 列出所有本地分支</span><br><span class="line">$ git branch</span><br><span class="line"></span><br><span class="line"># 列出所有远程分支</span><br><span class="line">$ git branch -r</span><br><span class="line"></span><br><span class="line"># 列出所有本地分支和远程分支</span><br><span class="line">$ git branch -a</span><br><span class="line"></span><br><span class="line"># 新建一个分支，但依然停留在当前分支</span><br><span class="line">$ git branch [branch-name]</span><br><span class="line"></span><br><span class="line"># 新建一个分支，并切换到该分支</span><br><span class="line">$ git checkout -b [branch]</span><br><span class="line"></span><br><span class="line"># 新建一个分支，指向指定commit</span><br><span class="line">$ git branch [branch] [commit]</span><br><span class="line"></span><br><span class="line"># 新建一个分支，与指定的远程分支建立追踪关系</span><br><span class="line">$ git branch --track [branch] [remote-branch]</span><br><span class="line"></span><br><span class="line"># 合并指定分支到当前分支</span><br><span class="line">$ git merge [branch]</span><br><span class="line"></span><br><span class="line"># 选择一个commit，合并进当前分支</span><br><span class="line">$ git cherry-pick [commit]</span><br><span class="line"></span><br><span class="line"># 删除分支</span><br><span class="line">$ git branch -d [branch-name]</span><br><span class="line"></span><br><span class="line"># 删除远程分支</span><br><span class="line">$ git push origin --delete [branch-name]</span><br><span class="line">$ git branch -dr [remote/branch]</span><br></pre></td></tr></table></figure>
+<h3 id="标签"><a href="#标签" class="headerlink" title="标签"></a>标签</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"># 列出所有tag</span><br><span class="line">$ git tag</span><br><span class="line"></span><br><span class="line"># 新建一个tag在当前commit</span><br><span class="line">$ git tag [tag]</span><br><span class="line"></span><br><span class="line"># 新建一个tag在指定commit</span><br><span class="line">$ git tag [tag] [commit]</span><br><span class="line"></span><br><span class="line"># 删除本地tag</span><br><span class="line">$ git tag -d [tag]</span><br><span class="line"></span><br><span class="line"># 删除远程tag</span><br><span class="line">$ git push origin :refs/tags/[tagName]</span><br><span class="line"></span><br><span class="line"># 查看tag信息</span><br><span class="line">$ git show [tag]</span><br><span class="line"></span><br><span class="line"># 提交指定tag</span><br><span class="line">$ git push [remote] [tag]</span><br><span class="line"></span><br><span class="line"># 提交所有tag</span><br><span class="line">$ git push [remote] --tags</span><br><span class="line"></span><br><span class="line"># 新建一个分支，指向某个tag</span><br><span class="line">$ git checkout -b [branch] [tag]</span><br></pre></td></tr></table></figure>
+<h3 id="查看信息"><a href="#查看信息" class="headerlink" title="查看信息"></a>查看信息</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"># 显示有变更的文件</span><br><span class="line">$ git status</span><br><span class="line"></span><br><span class="line"># 显示当前分支的版本历史</span><br><span class="line">$ git log</span><br><span class="line"></span><br><span class="line"># 显示commit历史，以及每次commit发生变更的文件</span><br><span class="line">$ git log --stat</span><br><span class="line"></span><br><span class="line"># 搜索提交历史，根据关键词</span><br><span class="line">$ git log -S [keyword]</span><br><span class="line"></span><br><span class="line"># 显示某个commit之后的所有变动，每个commit占据一行</span><br><span class="line">$ git log [tag] HEAD --pretty=format:%s</span><br><span class="line"></span><br><span class="line"># 显示某个commit之后的所有变动，其“提交说明”必须符合搜索条件</span><br><span class="line">$ git log [tag] HEAD --grep feature</span><br><span class="line"></span><br><span class="line"># 显示某个文件的版本历史，包括文件改名</span><br><span class="line">$ git log --follow [file]</span><br><span class="line">$ git whatchanged [file]</span><br><span class="line"></span><br><span class="line"># 显示指定文件相关的每次一diff</span><br><span class="line">$ git log -p [file]</span><br><span class="line"></span><br><span class="line"># 显示过去5次提交</span><br><span class="line">$ git log -5 --pretty --online</span><br><span class="line"></span><br><span class="line"># 显示所有提交过的用户，按提交次数排序</span><br><span class="line">$ git shortlog -sn</span><br><span class="line"></span><br><span class="line"># 显示指定该文件是什么人在什么时间修改过</span><br><span class="line">$ git blame [file]</span><br><span class="line"></span><br><span class="line"># 显示暂存区和工作区的差异</span><br><span class="line">$ git diff</span><br><span class="line"></span><br><span class="line"># 显示暂存区和上一个commit的差异</span><br><span class="line">$ git diff --cached [file]</span><br><span class="line"></span><br><span class="line"># 显示工作区与当前分支最新commit之间的差异</span><br><span class="line">$ git diff HEAD</span><br><span class="line"></span><br><span class="line"># 显示两次提交之间的差异</span><br><span class="line">$ git diff [first-branch]...[second-branch]</span><br><span class="line"></span><br><span class="line"># 显示今天你写了多少行代码</span><br><span class="line">$ git diff --shortstat &quot;@&#123;0 day ago&#125;&quot;</span><br><span class="line"></span><br><span class="line"># 显示某次提交的元数据和内容变化</span><br><span class="line">$ git show [commit]</span><br><span class="line"></span><br><span class="line"># 显示某次提交发生变化的文件</span><br><span class="line">$ git show --name-only [commit]</span><br><span class="line"></span><br><span class="line"># 显示某次提交时，某个文件的内容</span><br><span class="line">$ git show [commit]:[filename]</span><br><span class="line"></span><br><span class="line"># 显示当前分支的最近几次提交</span><br><span class="line">$ git reflog</span><br></pre></td></tr></table></figure>
+<h3 id="远程同步"><a href="#远程同步" class="headerlink" title="远程同步"></a>远程同步</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"># 下载远程仓库的所有变动</span><br><span class="line">$ git fetch [remote]</span><br><span class="line"></span><br><span class="line"># 显示所有远程仓库</span><br><span class="line">$ git remote -V</span><br><span class="line"></span><br><span class="line"># 显示某个远程仓库的信息</span><br><span class="line">$ git remote show [remote]</span><br><span class="line"></span><br><span class="line"># 增加一个新的远程仓库，并命名</span><br><span class="line">$ git remote add [shortname] [url]</span><br><span class="line"></span><br><span class="line"># 取回远程仓库的变化，并与本地分支合并</span><br><span class="line">$ git pull [remote] [branch]</span><br><span class="line"></span><br><span class="line"># 删除本地指定分支到远程仓库</span><br><span class="line">$ git push [remote] [branch]</span><br><span class="line"></span><br><span class="line"># 强行推送当前分支到远程仓库，即使有冲突</span><br><span class="line">$ git push [remote] --force</span><br><span class="line"></span><br><span class="line"># 推送所有分支到远程仓库</span><br><span class="line">$ git push [remote] --all</span><br></pre></td></tr></table></figure>
+<h3 id="撤销"><a href="#撤销" class="headerlink" title="撤销"></a>撤销</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"># 恢复暂存区的指定文件到工作区</span><br><span class="line">$ git checkout [file]</span><br><span class="line"></span><br><span class="line"># 恢复某个commit的指定文件到暂存区和工作区</span><br><span class="line">$ git checkout [commit] [file]</span><br><span class="line"></span><br><span class="line"># 恢复暂存区的所有文件到工作区</span><br><span class="line">$ git checkout .</span><br><span class="line"></span><br><span class="line"># 充值暂存区的指定文件，与上一次commit保持一致，但工作区不变</span><br><span class="line">$ git reset [file]</span><br><span class="line"></span><br><span class="line"># 重置暂存区与工作区，与上一次commit保持一致</span><br><span class="line">$ git reset --hard</span><br><span class="line"></span><br><span class="line"># 重置当前分支的指针指定commit，同时重置暂存区，但工作区不变</span><br><span class="line">$ git reset [commit]</span><br><span class="line"></span><br><span class="line"># 重置当前分支的HEAD为指定commit，同时重置暂存区和工作区，与指定commit一致</span><br><span class="line">$ git reset --hard[commit]</span><br><span class="line"></span><br><span class="line"># 重置当前分支的HEAD为指定commit，但保持暂存区和工作区不变</span><br><span class="line">$ git reset --keep [commit]</span><br><span class="line"></span><br><span class="line"># 新建一个commit，用来撤销指定commit</span><br><span class="line"># 后者的所有变化都将被前者抵消，并且应用到当前分支</span><br><span class="line">$ git revert [commit]</span><br><span class="line"></span><br><span class="line"># 暂时将未提交的变化移除，稍后再移入</span><br><span class="line">$ git stash</span><br><span class="line">$ git stash pop</span><br></pre></td></tr></table></figure>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 生成一个可供发布的压缩包</span><br><span class="line">$ git archive</span><br></pre></td></tr></table></figure>
+<h3 id="合成图"><a href="#合成图" class="headerlink" title="合成图"></a>合成图</h3><p><img src="http://upload-images.jianshu.io/upload_images/10567362-ff0d680442cfcd4c.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Git常用操作.jpg"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://leafMaple.cn/git命令/" data-id="cjoi8hq8l0002b8tkqlaum0ye" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/工具的使用/">工具的使用</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
 
 </section>
         
@@ -156,6 +457,10 @@
       <ul>
         
           <li>
+            <a href="/二叉树的深度遍历和反转/">二叉树的深度遍历和反转</a>
+          </li>
+        
+          <li>
             <a href="/回文数子串/">回文数子串</a>
           </li>
         
@@ -169,10 +474,6 @@
         
           <li>
             <a href="/vue的数据双向绑定原理/">vue的数据双向绑定原理</a>
-          </li>
-        
-          <li>
-            <a href="/react通信/">react通信</a>
           </li>
         
       </ul>

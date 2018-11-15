@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>二叉树的深度遍历和反转 | 枫叶</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="基本概念二叉树的每个节点最多只有两颗字树，左子树和右子树，次序不能颠倒。==== 性质 ====    非空的二叉树的第n层最多有2^(n-1)个元素；    深度为h的二叉树最多有2^h-1个节点。 ==== 满二叉树 ====满二叉树除了最后一层的节点，其他节点都有两个子节点。若满二叉树的深度为h，那么这棵树的节点数必然是2^h-1. 二叉树的遍历遍历即将树的所有结点访问且仅访问一次。按照根">
+<meta property="og:type" content="article">
+<meta property="og:title" content="二叉树的深度遍历和反转">
+<meta property="og:url" content="http://leafMaple.cn/二叉树的深度遍历和反转/index.html">
+<meta property="og:site_name" content="枫叶">
+<meta property="og:description" content="基本概念二叉树的每个节点最多只有两颗字树，左子树和右子树，次序不能颠倒。==== 性质 ====    非空的二叉树的第n层最多有2^(n-1)个元素；    深度为h的二叉树最多有2^h-1个节点。 ==== 满二叉树 ====满二叉树除了最后一层的节点，其他节点都有两个子节点。若满二叉树的深度为h，那么这棵树的节点数必然是2^h-1. 二叉树的遍历遍历即将树的所有结点访问且仅访问一次。按照根">
+<meta property="og:locale" content="cn">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/10567362-b87d3274b8919d64.gif?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/10567362-c5de844a50240a3b.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/10567362-59f348b1ce9792ea.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2018-11-15T06:48:38.995Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="二叉树的深度遍历和反转">
+<meta name="twitter:description" content="基本概念二叉树的每个节点最多只有两颗字树，左子树和右子树，次序不能颠倒。==== 性质 ====    非空的二叉树的第n层最多有2^(n-1)个元素；    深度为h的二叉树最多有2^h-1个节点。 ==== 满二叉树 ====满二叉树除了最后一层的节点，其他节点都有两个子节点。若满二叉树的深度为h，那么这棵树的节点数必然是2^h-1. 二叉树的遍历遍历即将树的所有结点访问且仅访问一次。按照根">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/10567362-b87d3274b8919d64.gif?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+  
+    <link rel="alternate" href="/atom.xml" title="枫叶" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">枫叶</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">blogs</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://leafMaple.cn"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-二叉树的深度遍历和反转" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/二叉树的深度遍历和反转/" class="article-date">
+  <time datetime="2018-11-15T06:48:03.000Z" itemprop="datePublished">2018-11-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      二叉树的深度遍历和反转
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!--
+author: 阿彬-肖利彬
+date: 2017-02-26
+title: 二叉树的遍历
+tags: 算法
+category: 前端
+status: publish 
+summary: 本文二叉树的一些知识点。
+-->
+<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p>二叉树的每个节点最多只有两颗字树，左子树和右子树，次序不能颠倒。<br>==== 性质 ====<br>    非空的二叉树的第n层最多有2^(n-1)个元素；<br>    深度为h的二叉树最多有2^h-1个节点。</p>
+<p>==== 满二叉树 ====<br>满二叉树除了最后一层的节点，其他节点都有两个子节点。<br>若满二叉树的深度为h，那么这棵树的节点数必然是2^h-1.</p>
+<h2 id="二叉树的遍历"><a href="#二叉树的遍历" class="headerlink" title="二叉树的遍历"></a>二叉树的遍历</h2><p>遍历即将树的所有结点访问且仅访问一次。按照根节点位置的不同分为前序遍历，中序遍历，后序遍历。</p>
+<pre><code>前序遍历：根节点-&gt;左子树-&gt;右子树
+
+中序遍历：左子树-&gt;根节点-&gt;右子树
+
+后序遍历：左子树-&gt;右子树-&gt;根节点
+</code></pre><p>例如：求下面树的三种遍历</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/10567362-b87d3274b8919d64.gif?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="二叉树图gif.gif"></p>
+<pre><code>前序遍历：abdefgc
+
+中序遍历：debgfac
+
+后序遍历：edgfbca
+</code></pre><h2 id="算法求解二叉树的深度"><a href="#算法求解二叉树的深度" class="headerlink" title="算法求解二叉树的深度"></a>算法求解二叉树的深度</h2><p>给定一个二叉树，求二叉树的深度。<br>首先进行分析，要求出二叉树的深度，那么我们必须要对二叉树进行遍历，对每个节点都需要去走一遍。<br>要求对树进行遍历，那么我们肯定会选择一种遍历的方法，由于是从根节点开始的，于是我选取的是前序遍历。<br>根据上边二叉树的前序遍历来进行深度的求解，当树节点没有了子树节点后返回0，每回到上一层次就+1，到达根节点的时候就判断左右子树所返回的值取大的那个，就是我们所求的最大深度。  </p>
+<p><img src="https://upload-images.jianshu.io/upload_images/10567362-c5de844a50240a3b.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="二叉树正向.PNG"></p>
+<p>如 上图的深度为5.</p>
+<p>下面就是js代码的实现方式。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Definition for a binary tree node.</span><br><span class="line"> * function TreeNode(val) &#123;</span><br><span class="line"> *     this.val = val;</span><br><span class="line"> *     this.left = this.right = null;</span><br><span class="line"> * &#125;</span><br><span class="line"> */</span><br><span class="line">/**</span><br><span class="line"> * @param &#123;TreeNode&#125; root</span><br><span class="line"> * @return &#123;number&#125;</span><br><span class="line"> */</span><br><span class="line">var maxDepth = function(root) &#123;</span><br><span class="line"></span><br><span class="line">    // 第一种方法，因为将root树当成值传入到了TreeNode里边，所以在后边出现了list.val.letf的地方。</span><br><span class="line">    let list = new TreeNode(root);</span><br><span class="line">    let height,left,right;</span><br><span class="line">    </span><br><span class="line">    if(list.val === null)&#123;</span><br><span class="line">        return 0;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    left = maxDepth(list.val.left);</span><br><span class="line">    right = maxDepth(list.val.right);</span><br><span class="line">    height = (left&gt;right?left:right)+1;</span><br><span class="line">    </span><br><span class="line">    return height;</span><br><span class="line"></span><br><span class="line">    // 第二种方法，直接上手</span><br><span class="line">    return root === null ? 0 : Math.max(maxDepth(root.left), maxDepth(root.right)) + 1;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<h2 id="算法求解二叉树的反转"><a href="#算法求解二叉树的反转" class="headerlink" title="算法求解二叉树的反转"></a>算法求解二叉树的反转</h2><p>得到题目，首先要判断一下，所给的树是不是空的，如果为空，那么就不需要去计算了。<br>其次，从根节点开始遍历，知道找到最下层的树节点，然后将左右节点的值进行交换，一步一步向上层走，知道根节点的左右子树交换完。<br>其实，这个题和上边求解二叉树的深度的题是相差不大的，只是将深度的计算变成了两个值的交换。</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/10567362-59f348b1ce9792ea.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="二叉树反转.PNG"></p>
+<p>二叉树的反转如上图。</p>
+<p>下边是二叉树反转的代码。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Definition for a binary tree node.</span><br><span class="line"> * function TreeNode(val) &#123;</span><br><span class="line"> *     this.val = val;</span><br><span class="line"> *     this.left = this.right = null;</span><br><span class="line"> * &#125;</span><br><span class="line"> */</span><br><span class="line">/**</span><br><span class="line"> * @param &#123;TreeNode&#125; root</span><br><span class="line"> * @return &#123;TreeNode&#125;</span><br><span class="line"> */</span><br><span class="line">var invertTree = function(root) &#123;</span><br><span class="line">    if (!root)</span><br><span class="line">        return null;</span><br><span class="line">        </span><br><span class="line">    // recursive</span><br><span class="line">    invertTree(root.left);</span><br><span class="line">    invertTree(root.right);</span><br><span class="line">    temp = root.left;</span><br><span class="line">    root.left = root.right;</span><br><span class="line">    root.right = temp;</span><br><span class="line">    </span><br><span class="line">    return root;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>二叉树的遍历很简单，但是出的题会非常的多，比如，求取节点的个数，比较两颗树是否相等等等。学无止境，不断前进。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://leafMaple.cn/二叉树的深度遍历和反转/" data-id="cjoi8hq8i0001b8tkz4om47m2" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/回文数子串/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">回文数子串</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具的使用/">工具的使用</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/工具的使用/" style="font-size: 10px;">工具的使用</a> <a href="/tags/算法/" style="font-size: 10px;">算法</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/二叉树的深度遍历和反转/">二叉树的深度遍历和反转</a>
+          </li>
+        
+          <li>
+            <a href="/回文数子串/">回文数子串</a>
+          </li>
+        
+          <li>
+            <a href="/从详情返回主页停留在进入的位置/">从详情返回主页停留在进入的位置</a>
+          </li>
+        
+          <li>
+            <a href="/实现一个类似音乐播放器的滑动效果/">实现一个类似音乐播放器的滑动效果</a>
+          </li>
+        
+          <li>
+            <a href="/vue的数据双向绑定原理/">vue的数据双向绑定原理</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 maple leaf<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
